@@ -13,10 +13,13 @@ var getCollection = database.getCollection;
 var StatusUpdateSchema = require('./schemas/statusupdate.json');
 var CommentSchema = require('./schemas/comment.json');
 var validate = require('express-jsonschema').validate;
+var mongo_express = require('mongo-express/lib/middleware');
+var mongo_express_config = require('mongo-express/config.default.js');
 
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(express.static('../client/build'));
+app.use('/mongo_express', mongo_express(mongo_express_config));
 
 /**
  * Resolves a feed item. Internal to the server, since it's synchronous.
